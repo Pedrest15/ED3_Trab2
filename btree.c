@@ -7,21 +7,16 @@ BTHeader* create_btheader(){
     header->noRaiz = -1;
     header->nroChavesTotal = 0;
     header->alturaArvore = 0;
-    header->RRNproxNo = 0;
+    header->RRNproxNo = -1;
 
     return header;
 }
 
 //le os campos do cabecalho
-int read_btheader( FILE* file, BTHeader* header){
-
+void read_btheader( FILE* file, BTHeader* header){
     fseek(file, 0, SEEK_SET);
-    fread(&header->status, sizeof(char), 1, file);
-    /*if(header->status == '0'){
-        // error_file();
-        return 0; //erro no arquivo    
-    }*/
     
+    fread(&header->status, sizeof(char), 1, file);
     fread(&header->noRaiz, sizeof(int), 1, file);
     fread(&header->nroChavesTotal, sizeof(int), 1, file);
     fread(&header->alturaArvore, sizeof(int), 1, file);
@@ -29,7 +24,6 @@ int read_btheader( FILE* file, BTHeader* header){
 
     fseek(file, 49, SEEK_CUR); //pula o lixo
 
-    return 1; //sucesso
 }
 
 //escreve o cabecalho no arquivo indicado
@@ -57,7 +51,7 @@ void update_btheader(FILE* file, BTHeader* header) {
     fwrite(&header->RRNproxNo, sizeof(int), 1, file);
 }
 
-int read_node(FILE* file, Node* node) { // verificar se funciona
+void read_node(FILE* file, Node* node) {
     fread(&node->folha, LEN_FOLHA, 1, file);
     fread(&node->nroChavesNo, LEN_NROCHAVESNO, 1, file);
     fread(&node->alturaNo, LEN_ALTURANO, 1, file);
@@ -146,17 +140,3 @@ void print_nodes(Node* node) {
     printf("\n\n");
     
 }
-
-// PESQUISA do 'X'
-/**
- * Olhar o nó raiz
- * Ver se o X está ali, compara com as chaves
- * Ver pelas chaves qual ponteiro deve-se pegar
- * Ver se algumas dessas novas chaves são iguais a X
- * Pegar um novo ponteiro
- * 
- * Fazer isso até achar uma chave igual X 
- * OU
- * Pegar um ponteiro que aponta para NULO
-*/
-

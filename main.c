@@ -5,7 +5,7 @@ Pedro Lucas Castro de Andrade - 11212289 - participacao: 100%
 
 #include <stdio.h>
 
-#include "command7.h"
+#include "insertion.h"
 //#include "command8.h"
 //#include "command9.h"
 //#include "command10.h"
@@ -15,7 +15,7 @@ int main(void) {
     //variaveis p/ entrada do teclado
     int command;
     char data_file1[30];
-    char data_file2[30];
+    // char data_file2[30];
     char index_file[30];
 
     //le do teclado qual o comando sera acionado
@@ -35,9 +35,11 @@ int main(void) {
             break;
         case 9:
             scanf("%s %s", data_file1, index_file);
-            /*if(command7(file1, file2)){
-                binarioNaTela(file2);
-            }*/
+            if(command9(data_file1, index_file)){
+
+                binarioNaTela(data_file1);
+                binarioNaTela(index_file);
+            }
             break;
         case 10:
             
